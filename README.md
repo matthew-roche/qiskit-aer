@@ -1,49 +1,36 @@
 # Aer - high performance quantum circuit simulation for Qiskit
 
-[![License](https://img.shields.io/github/license/Qiskit/qiskit-aer.svg?style=popout-square)](https://opensource.org/licenses/Apache-2.0)
-[![Build](https://github.com/Qiskit/qiskit-aer/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/Qiskit/qiskit-aer/actions/workflows/build.yml)
-[![Tests](https://github.com/Qiskit/qiskit-aer/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/Qiskit/qiskit-aer/actions/workflows/tests.yml)
-[![](https://img.shields.io/github/release/Qiskit/qiskit-aer.svg?style=popout-square)](https://github.com/Qiskit/qiskit-aer/releases)
-[![](https://img.shields.io/pypi/dm/qiskit-aer.svg?style=popout-square)](https://pypi.org/project/qiskit-aer/)
+[![License](https://img.shields.io/github/license/Qiskit/qiskit-aer.svg?style=popout-square)](https://opensource.org/licenses/Apache-2.0)   
+[Source Repository](https://github.com/Qiskit/qiskit-aer)
+
+## Windows CUDA build notes (unofficial)
+
+This fork exists mainly to make Qiskit Aer build and run on Windows with CUDA. For Linux builds please check the upstream!   
+
+The upstream project does not currently ship Windows GPU wheels,
+so this fork includes small build fixes and local wheel builds.
+
+Not intended as a replacement for upstream — just a working Windows build.
 
 **Aer** is a high performance simulator for quantum circuits written in Qiskit, that includes realistic noise models.
 
 ## Installation
 
-We encourage installing Aer via the pip tool (a python package manager):
-
 ```bash
-pip install qiskit-aer
+pip install <file-name>.whl
 ```
 
-Pip will handle all dependencies automatically for us, and you will always install the latest (and well-tested) version.
+Pip will handle all dependencies automatically for us.
 
-To install from source, follow the instructions in the [contribution guidelines](CONTRIBUTING.md).
+To install from source, follow the instructions in the [contribution guidelines ref from main repo](https://github.com/Qiskit/qiskit-aer/blob/main/CONTRIBUTING.md).
 
 ## Installing GPU support
 
-In order to install and run the GPU supported simulators on Linux, you need CUDA&reg; 11.2 or newer previously installed.
+In order to install and run the GPU supported simulators on Windows, you need CUDA&reg; 11.2 or newer previously installed.
 CUDA&reg; itself would require a set of specific GPU drivers. Please follow CUDA&reg; installation procedure in the NVIDIA&reg; [web](https://www.nvidia.com/drivers).
 
-If you want to install our GPU supported simulators, you have to install this other package:
-
-```bash
-pip install qiskit-aer-gpu
-```
-
-The package above is for CUDA&reg; 12, so if your system has CUDA&reg; 11 installed, install separate package:
-```bash
-pip install qiskit-aer-gpu-cu11
-```
-
-This will overwrite your current `qiskit-aer` package installation giving you
-the same functionality found in the canonical `qiskit-aer` package, plus the
-ability to run the GPU supported simulators: statevector, density matrix, and unitary.
-
-**Note**: This package is only available on x86_64 Linux. For other platforms
-that have CUDA support, you will have to build from source. You can refer to
-the [contributing guide](CONTRIBUTING.md#building-with-gpu-support)
-for instructions on doing this.
+## Additional Support
+If you need a build for a specific CUDA and windows version let me know!
 
 ## Simulating your first Qiskit circuit with Aer
 Now that you have Aer installed, you can start simulating quantum circuits using primitives and noise models. Here is a basic example:
@@ -143,7 +130,7 @@ job_result = job3.result()
 print(f"counts for Bell circuit w/noise: {job_result[0].data.meas.get_counts()}")
 ```
 
-## Contribution Guidelines
+## Contribution Guidelines (Copied from upstream)
 
 If you'd like to contribute to Aer, please take a look at our
 [contribution guidelines](CONTRIBUTING.md). This project adheres to Qiskit's [code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
@@ -159,6 +146,6 @@ Now you're set up and ready to check out some of the other examples from the [Ae
 Aer is the work of [many people](https://github.com/Qiskit/qiskit-aer/graphs/contributors) who contribute to the project at different levels.
 If you use Qiskit, please cite as per the included [BibTeX file](https://github.com/Qiskit/qiskit/blob/main/CITATION.bib).
 
-## License
+## License (Copied from upstream)
 
 [Apache License 2.0](LICENSE.txt)
