@@ -68,8 +68,8 @@ T write_value(size_t index, const T &v) {
 
 template <typename T>
 void read_value(const py::tuple &t, size_t index, optional<T> &v) {
-  if (t[index].cast<py::tuple>()[0].cast<bool>())
-    v.value(t[index].cast<py::tuple>()[1].cast<T>());
+  if (t[index].cast<py::tuple>()[0].template cast<bool>())
+    v.value(t[index].cast<py::tuple>()[1].template cast<T>());
 }
 
 template <typename T>

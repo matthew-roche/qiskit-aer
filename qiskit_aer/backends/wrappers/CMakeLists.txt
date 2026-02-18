@@ -60,6 +60,14 @@ endif()
 target_include_directories(controller_wrappers PRIVATE ${AER_SIMULATOR_CPP_SRC_DIR}
                                                PRIVATE ${AER_SIMULATOR_CPP_EXTERNAL_LIBS})
 target_link_libraries(controller_wrappers ${AER_LIBRARIES})
+
+if (MSVC)
+  # CUDA toolkit libs on Windows
+  target_link_directories(controller_wrappers PRIVATE "${CUDA_TOOLKIT_ROOT_DIR}/lib/x64")
+else()
+  target_link_directories(controller_wrappers PRIVATE "${CUDA_TOOLKIT_ROOT_DIR}/lib64")
+endif()
+
 target_compile_definitions(controller_wrappers PRIVATE ${AER_COMPILER_DEFINITIONS})
 install(TARGETS controller_wrappers LIBRARY DESTINATION qiskit_aer/backends)
 
