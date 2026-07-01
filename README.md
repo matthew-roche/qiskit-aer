@@ -14,6 +14,11 @@ Not intended as a replacement for upstream — just a working Windows build.
 
 **Aer** is a high performance simulator for quantum circuits written in Qiskit, that includes realistic noise models.
 
+| :exclamation:  **Reduced Maintenance Mode**  |
+|----------------------------------------------|
+| Aer is currently operating under **reduced maintenance**. The maintainers are only able to address **critical bug fixes**. Feature requests and non-critical enhancements have been placed in the backlog and will be revisited as capacity allows. |
+
+
 ## Installation
 
 ```bash
@@ -117,14 +122,14 @@ print(f"counts for parameterized circuit : {job_result[0].data.meas.get_counts()
 # Simulating with noise model from actual hardware
 # --------------------------------------------------
 from qiskit_ibm_runtime import QiskitRuntimeService
-provider = QiskitRuntimeService(channel='ibm_quantum', token="set your own token here")
-backend = provider.get_backend("ibm_kyoto")
+provider = QiskitRuntimeService()
+backend = provider.least_busy()
 
 # create sampler from the actual backend
 sampler = SamplerV2.from_backend(backend)
 
 # run a sampler job on the parameterized circuits with noise model of the actual hardware
-bell_t = transpile(bell, AerSimulator(basis_gates=["ecr", "id", "rz", "sx"]), optimization_level=0)
+bell_t = transpile(bell, AerSimulator(basis_gates=backend.basis_gates), optimization_level=0)
 job3 = sampler.run([bell_t], shots=128)
 job_result = job3.result()
 print(f"counts for Bell circuit w/noise: {job_result[0].data.meas.get_counts()}")
@@ -135,7 +140,7 @@ print(f"counts for Bell circuit w/noise: {job_result[0].data.meas.get_counts()}"
 If you'd like to contribute to Aer, please take a look at our
 [contribution guidelines](CONTRIBUTING.md). This project adheres to Qiskit's [code of conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
-We use [GitHub issues](https://github.com/Qiskit/qiskit-aer/issues) for tracking requests and bugs. Please use our [slack](https://qiskit.slack.com) for discussion and simple questions. To join our Slack community use the [link](https://qiskit.slack.com/join/shared_invite/zt-fybmq791-hYRopcSH6YetxycNPXgv~A#/). For questions that are more suited for a forum, we use the Qiskit tag in the [Stack Exchange](https://quantumcomputing.stackexchange.com/questions/tagged/qiskit).
+We use [GitHub issues](https://github.com/Qiskit/qiskit-aer/issues) for tracking requests and bugs. Please use our [slack](https://qiskit.slack.com) for discussion and simple questions. To join our Slack community use the [link](https://qiskit.slack.com/join/shared_invite/zt-fybmq791-hYRopcSH6YetxycNPXgv~A#/) or submit a [request to join](https://qisk.it/join-slack) the Qiskit slack workspace. For questions that are more suited for a forum, we use the Qiskit tag in the [Stack Exchange](https://quantumcomputing.stackexchange.com/questions/tagged/qiskit).
 
 ## Next Steps
 
