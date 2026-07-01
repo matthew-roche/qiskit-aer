@@ -93,7 +93,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.10", "3.11", "3.12.5", "3.13", "3.14"]
         qiskit-extra: [""]
         include:
           - python-version: "3.10"
@@ -147,7 +147,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        python-version: ['3.10']
+        python-version: ["3.10", "3.11", "3.12.5", "3.13", "3.14"]
         os: ["ubuntu-latest"]
     env:
       AER_THRUST_BACKEND: OMP
@@ -198,7 +198,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.10", "3.11", "3.12.5", "3.13", "3.14"]
     env:
       AER_THRUST_BACKEND: OMP
       QISKIT_TEST_CAPTURE_STREAMS: 1
@@ -256,7 +256,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.12.5"]
     env:
       AER_THRUST_BACKEND: OMP
       QISKIT_TEST_CAPTURE_STREAMS: 1
@@ -264,6 +264,8 @@ jobs:
       # a new internal interface that will be the default in jupyter-core 6.x.
       # This variable should become redundant on release of jupyter-core 6.
       JUPYTER_PLATFORM_DIRS: 1
+      CMAKE_GENERATOR: "Visual Studio 16 2019"
+      CMAKE_GENERATOR_PLATFORM: x64
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -281,6 +283,9 @@ jobs:
             ${{ runner.os }}-${{ matrix.python-version}}-
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '[16.0,17.0)'
+
       - name: Build Aer Windows
         env:
           CMAKE_GENERATOR: "Visual Studio 17 2022"
