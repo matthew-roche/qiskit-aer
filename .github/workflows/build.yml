@@ -9,11 +9,21 @@ concurrency:
   cancel-in-progress: true
 jobs:
   wheel:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-15-intel", "ubuntu-latest", "windows-2022", "macos-latest"]
+        include:
+          - runner: macos-15-intel
+            artifact-name: macos-15-intel
+          - runner: ubuntu-latest
+            artifact-name: ubuntu-latest
+          - runner: windows-2022
+            artifact-name: windows-2022
+          - runner: macos-latest
+            artifact-name: macos-latest
+          - runner: [self-hosted, Windows, cuda]
+            artifact-name: windows-cuda
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -32,4 +42,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: ./wheelhouse/*.whl
-          name: artifact-${{ matrix.os }}
+          name: artifact-${{ matrix.artifact-name }}

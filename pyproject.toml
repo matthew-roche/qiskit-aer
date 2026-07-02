@@ -31,7 +31,7 @@ before-all = "dnf install -y openblas-devel"
 before-build = [
     "python -m pip install 'conan<2.0.0'",
     "conan config init --force",
-    "sed -i '' 's/\"16.0\"/\"16.0\", \"17.0\"/' ~/.conan/settings.yml",
+    "sed -i '' 's/\"16.0\"/\"16.0\", \"17.0\", \"21.0\"/' ~/.conan/settings.yml",
 ]
 
 [tool.cibuildwheel.windows]
