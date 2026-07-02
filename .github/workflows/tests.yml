@@ -263,6 +263,7 @@ jobs:
       # Needed to suppress a warning in jupyter-core 5.x by eagerly migrating to
       # a new internal interface that will be the default in jupyter-core 6.x.
       # This variable should become redundant on release of jupyter-core 6.
+      # Windows 2019 for older build tools, but the wheel works on windows 11 + cuda and so on
       JUPYTER_PLATFORM_DIRS: 1
     steps:
       - uses: actions/checkout@v4
