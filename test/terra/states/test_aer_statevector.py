@@ -301,7 +301,10 @@ class TestAerStatevector(common.QiskitAerTestCase):
             if not isinstance(sv2, np.ndarray):
                 sv2 = sv2.data
             # return np.isclose(np.cross(sv1, sv2), 0) # error in numpy-2.5.0
-            return np.isclose(sv1[0]*sv2[1] - sv1[1]*sv2[0], 0)
+            return np.isclose(
+                sv1[0] * sv2[1] - sv1[1] * sv2[0],
+                0,
+            )
 
         circuit = QuantumCircuit(1)
         circuit.h(0)
